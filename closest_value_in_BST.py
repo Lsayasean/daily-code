@@ -1,6 +1,7 @@
 def findClosestValueInBst(tree, target):
     # a helper is used to help keep to start the closest value
-	return helper(tree, target, tree.value)
+    start = tree.value
+	return helper(tree, target, start)
 
 def helper(tree, target, closest):
     # finish the recursion when tree.value is none
