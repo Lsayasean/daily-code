@@ -12,15 +12,29 @@ class Solution:
         def traverseTree(original, cloned, target):
             # something new I learned, nonlocal keywork to bring in a non local variable
             nonlocal reference
-            if original is not None and cloned is not None:
+            if cloned is not None:
                 if cloned.val == target.val:
                     reference = cloned
                     return
                 else:
                     # implementing DFS on BOTH tree to traverse from left to right
-                    traverseTree(original.left, cloned.left, target)
-                    traverseTree(original.right, cloned.right, target)
+                    traverseTree(cloned.left, target)
+                    traverseTree( cloned.right, target)
             else:
                 return
-        traverseTree(original, cloned, target)
+        traverseTree(cloned, target)
         return reference
+
+# anothery way to implement this with BFS
+class Solution:
+    def getTargetCopy(self, original: TreeNode, cloned: TreeNode, target: TreeNode) -> TreeNode:
+        queue = [cloned]
+        while len(queue) > 0:
+            current = queue.pop(0)
+            if current.val == target.val:
+                return current
+            else:
+                if current.left is not None:
+                    queue.append(current.left)
+                if current.right is not None:
+                    queue.append(current.right)
